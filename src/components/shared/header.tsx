@@ -4,10 +4,6 @@ import {
     Toolbar,
     Button,
     CardMedia } from "@mui/material";
-import Cookies from 'js-cookie'
-import LogoutButton from "./logoutbutton"
-import { useEffect, useState } from "react";
-
 export default function Header() {
     return (
     <AppBar 

@@ -12,7 +12,11 @@ type fDate = {
 
 // definitely abstractable and improvable but i'm not remaking a google forms just a 6 question form does not need that much work
 
-export default function FormCard() {
+type Prop = {
+    mobile: boolean
+};
+
+export default function FormCard(props: Prop) {
     const router = useRouter();
 
     const [dateMask, setDateMask] = useState<number>(0);
@@ -175,6 +179,7 @@ export default function FormCard() {
         textAlign: 'center'
     }}>
         <Question
+        mobile={props.mobile}
         errorFlag={(errorMask & 2) > 1}
         question="What days can you go to the BIG game?" 
         answerComp={
@@ -184,6 +189,7 @@ export default function FormCard() {
         />
 
         <Question
+        mobile={props.mobile}
         errorFlag={(errorMask & 4) > 1}
         question="Are you able to pitch in $10?"
         description="This is for us to be able to rent a solid gym roughly equidistant to everyone instead of by Fidel's house, so please say yes, as it just helps us organize this."
@@ -204,6 +210,7 @@ export default function FormCard() {
         />
 
         <Question
+        mobile={props.mobile}
         errorFlag={(errorMask & 8) > 1}
         question="What games would you like to play?"
         description="We're most likely going to this in a basketball court, so we're aiming for sports that can be played on one. We're only going to do one or two, so try to pick two max."
@@ -215,6 +222,7 @@ export default function FormCard() {
         />
 
         <Question
+        mobile={props.mobile}
         errorFlag={(errorMask & 16) > 1}
         question="Please enter your name:"
         answerComp={    
@@ -232,6 +240,7 @@ export default function FormCard() {
         />
 
         <Question
+        mobile={props.mobile}
         question="Any additional notes?"
         answerComp={
             <TextField
@@ -242,7 +251,8 @@ export default function FormCard() {
             onChange={handleNotesChange}
             sx={{
                 mt: '15px',
-                width: "1000px"
+                width: props.mobile ? "fit-content" : "650px",
+                mx: props.mobile ? "auto" : null
             }}
             />
         }
@@ -302,7 +312,8 @@ type QAProps = {
     question: string,
     description?: string,
     answerComp : React.ReactNode,
-    errorFlag? : boolean
+    errorFlag? : boolean,
+    mobile: boolean
 };
 
 
@@ -318,9 +329,10 @@ function Question(props: QAProps) {
             boxShadow: `0px 0px 10px 10px ${props.errorFlag ? '#ff0000B0' : 'black' }`,
             justifySelf: 'center',
             justifyItems: 'center',
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            mx: props.mobile ? "5px" : null
         }}>
-            <Typography variant="h4">{props.question}</Typography>
+            <Typography variant={props.mobile ? "h5" : "h4"}>{props.question}</Typography>
             {props.description && <Typography>{props.description}</Typography>}
             {props.answerComp}
         </Box>
