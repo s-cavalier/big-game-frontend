@@ -65,7 +65,7 @@ enum ErrorType {
 
     try {
 
-      const res = await fetch("http://localhost:8080/uauth", {
+      const res = await fetch("https://bg.so-cavalier.com/api/uauth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ enum ErrorType {
         }}  
       >
         <Typography variant="h4" justifySelf={'center'}>
-          Login
+          Signup/Login
         </Typography>
         <Typography mx={2} mt={2} textAlign={'center'}>
           We just need a phone number and a username to uniquely identify you. Please let us know if there is some error we need to resolve (like you forgot your username or something).

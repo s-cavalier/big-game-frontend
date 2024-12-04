@@ -26,13 +26,8 @@ export default function FormCard() {
 
     const uID = Number(Cookies.get('session'));
 
-    const watchCookies = useEffect(() => {
-        const checkSession = Cookies.get('session');
-        if (checkSession === undefined) router.push('/');
-      }, []);
-
     const watchRender = useEffect(() => {
-        fetch("http://localhost:8080/checkSession", {
+        fetch("https://bg.so-cavalier.com/api/checkSession", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -44,7 +39,7 @@ export default function FormCard() {
             if (!res.ok) throw 1;
             res.json().then((data) => {
                 try {
-                    if (data['error'] !== undefined && data['error'] === 'No sess.') throw 2;
+                    if (data['error'] !== undefined && data['error'] === 'No sess.') router.push('/');
                     if (data['error'] !== undefined) throw data['error'];
                     setDateMask(data['dateMask']);
                     setCanPay(data['canPay']);
@@ -115,7 +110,7 @@ export default function FormCard() {
         let blocker = true;
 
         try {
-            const res = await fetch('http://localhost:8080/logResponse', {
+            const res = await fetch('https://bg.so-cavalier.com/api/logResponse', {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

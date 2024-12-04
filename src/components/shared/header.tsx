@@ -9,12 +9,6 @@ import LogoutButton from "./logoutbutton"
 import { useEffect, useState } from "react";
 
 export default function Header() {
-
-    const [checkSession, setSession] = useState<string | undefined>(undefined);
-    const watchSession = useEffect(() => {
-        setSession(Cookies.get('session'));
-    }, []);
-
     return (
     <AppBar 
     position="sticky"
@@ -47,7 +41,6 @@ export default function Header() {
                 }}>
                 </CardMedia>
             </Button>
-            {checkSession === undefined ? null : <LogoutButton/>}
         </Toolbar>
     </AppBar>
     );
